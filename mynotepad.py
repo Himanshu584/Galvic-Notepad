@@ -71,7 +71,12 @@ if __name__ == "__main__":
     HelpMenu.add_command(label="About", command= About)
     Menubar.add_cascade(label="Help", menu=HelpMenu)
 
-    Menubar.config(menu=Menubar)
-    
+    root.config(menu=Menubar)
+
+    # Adding Scrollbar
+    Scroll = Scrollbar(TextArea)
+    Scroll.pack(side=RIGHT, fill=Y)
+    Scroll.config(command=TextArea.yview)
+    TextArea.config(yscrollcommand=Scroll.set)
     
     root.mainloop()
