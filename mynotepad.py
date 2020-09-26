@@ -7,50 +7,48 @@ WEIDTH = 400
 HEIGHT = 400
 
 def NewFile():
-    global file 
+    global file
     root.title('Galvic-Notepad')
-    file = None 
+    file= None 
     TextArea.delete(1.0, END)
 
 def OpenFile():
     global file 
-    file = askopenfilename(defaultextension='.txt',
-                            filetypes= [("All files", "*.*"),
-                            ("Text Documents", "*.txt*")                                
-                            ])
+    file = askopenfilename(defaultextension= ".txt",
+                            filetypes=[("All Files", "*.*")
+                                        ("Text Documents", "*.txt*")])
+
     if file == "":
-        file = None
+        file = None 
     else:
         root.title(os.path.basename(file)+ " -Notepad")
         TextArea.delete(1.0, END)
         f = open(file, 'r')
         TextArea.insert(1.0, f.read())
         f.close()
-
-
-
+        
 def SaveFile():
-        global file
-        if file == None:
-            file = askopenfilename(initialfile= "untitled.txt", defaultextension= ".txt",
-                                    filetypes= [("All Files", "*.*"),
-                                    ("Text Documents", "*.txt*")])
-            if file == "":
-                file = None 
-            else:
-                # saving as a new file 
-                f = open(file, 'w')
-                f.write(TextArea.get(1.0, END))
-                f.close()
-
-                root.title(os.path.basename(file)+ " -Notepad")
-                print("File Saved Successfully!")
-
+    global file 
+    if file == None:
+        file = askopenfilename(initialfile="Untitled.txt", 
+                                filetypes= [('All Files', "*.*"),
+                                            ('Text Documents', '*.txt*')])                   
+        if file == "":
+            file = None 
         else:
-            # save the file 
+            # saving as a new file
             f = open(file, "w")
-            f.write(TextArea.get(1.0, END))
+            f.write(TextArea.get(1.0,END))
             f.close()
+
+            root.title(os.path.basename(file)+ " -Notepad")
+            print("File Saved successfully")
+
+    else:
+        # save the file
+        f = open(file, "w")
+        f.write(TextArea.get(1.0,END))
+        f.close()
 
 def ExitFile():
     root.destroy()
@@ -65,11 +63,11 @@ def PasteFile():
     TextArea.event_generate("<<Paste>>")
 
 def About():
-    showinfo(title="GALVIC-NOTEPAD", message="""welcome to Galvic's notepad,\n
-                         you can use basic functionalities of notepad here!.\n
-                         Thankyu for using my Notepad.\n
-                                          - Himanshu Sharma (creator) """) 
-
+    showinfo(title="GALVIC-NOTEPAD", message="""
+                                            Welcome to Galvic-Notepad,\n
+                                        you can perform basic Notepad operations here!\n
+                                            Thankyu for using my Notepad.
+                                                                     - Himanshu Sharma (Creator)""")
 
 if __name__ == "__main__":
     # Basic window Setup
@@ -78,7 +76,7 @@ if __name__ == "__main__":
     root.title("Galvic-Notepad ")
     
     # Adding textares
-    TextArea = Text(root, font="lucida 13", fg="white")
+    TextArea = Text(root, font="lucida 13" ,fg= "white" )
     file = None 
     TextArea.pack(expand=True, fill=BOTH)
 
