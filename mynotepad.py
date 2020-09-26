@@ -78,7 +78,7 @@ if __name__ == "__main__":
     root.title("Galvic-Notepad ")
     
     # Adding textares
-    TextArea = Text(root, font="lucida 13")
+    TextArea = Text(root, font="lucida 13", fg="white")
     file = None 
     TextArea.pack(expand=True, fill=BOTH)
 
@@ -112,6 +112,7 @@ if __name__ == "__main__":
     Menubar.add_cascade(label="Help", menu=HelpMenu)
 
     root.config(menu=Menubar)
+    TextArea.config(bg='black')
 
     # Adding Scrollbar
     Scroll = Scrollbar(TextArea)
