@@ -7,36 +7,76 @@ WEIDTH = 400
 HEIGHT = 400
 
 def NewFile():
-    pass
+    global file 
+    root.title('Galvic-Notepad')
+    file = None 
+    TextArea.delete(1.0, END)
 
 def OpenFile():
-    pass
+    global file 
+    file = askopenfilename(defaultextension='.txt',
+                            filetypes= [("All files", "*.*"),
+                            ("Text Documents", "*.txt*")                                
+                            ])
+    if file == "":
+        file = None
+    else:
+        root.title(os.path.basename(file)+ " -Notepad")
+        TextArea.delete(1.0, END)
+        f = open(file, 'r')
+        TextArea.insert(1.0, f.read())
+        f.close()
+
+
 
 def SaveFile():
-    pass
+        global file
+        if file == None:
+            file = askopenfilename(initialfile= "untitled.txt", defaultextension= ".txt",
+                                    filetypes= [("All Files", "*.*"),
+                                    ("Text Documents", "*.txt*")])
+            if file == "":
+                file = None 
+            else:
+                # saving as a new file 
+                f = open(file, 'w')
+                f.write(TextArea.get(1.0, END))
+                f.close()
+
+                root.title(os.path.basename(file)+ " -Notepad")
+                print("File Saved Successfully!")
+
+        else:
+            # save the file 
+            f = open(file, "w")
+            f.write(TextArea.get(1.0, END))
+            f.close()
 
 def ExitFile():
-    pass 
+    root.destroy()
 
 def CutFile():
-    pass
+    TextArea.event_generate("<<Cut>>")
 
 def CopyFile():
-    pass
+    TextArea.event_generate("<<Copy>>")
 
 def PasteFile():
-    pass
+    TextArea.event_generate("<<Paste>>")
 
 def About():
-    pass
+    showinfo(title="GALVIC-NOTEPAD", message="""welcome to Galvic's notepad,\n
+                         you can use basic functionalities of notepad here!.\n
+                         Thankyu for using my Notepad.\n
+                                          - Himanshu Sharma (creator) """) 
 
 
 if __name__ == "__main__":
     # Basic window Setup
     root = Tk()
     root.geometry(f"{WEIDTH}x{HEIGHT}")
-    root.title("Untitled-Notepad ")
-
+    root.title("Galvic-Notepad ")
+    
     # Adding textares
     TextArea = Text(root, font="lucida 13")
     file = None 
